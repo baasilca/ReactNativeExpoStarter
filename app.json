@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "HeyLove",
+    "slug": "HeyLove",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/fish.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/fish.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.cezcon.Todoapp"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "extra": {
+        "router": {
+          "origin": false
+        },
+        "eas": {
+          "projectId": "6a59d089-6e0e-4b2e-821e-7784d54ba4de"
+        }
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
+      },
+      "updates": {
+        "url": "https://u.expo.dev/cba5fc11-c933-4c8e-93dd-fe0fd432ee10"
+      },
+      "eas": {
+        "projectId": "2309361e-01d4-436d-b13e-a383b1b8377c"
+      }
+    }
+  }
+}

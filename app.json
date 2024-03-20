@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "HeyLove",
-    "slug": "HeyLove",
+    "name": "LearningRN",
+    "slug": "LearningRN",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/fish.png",
+    "icon": "./assets/splash.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/fish.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

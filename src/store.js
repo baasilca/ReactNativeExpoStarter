@@ -3,8 +3,7 @@ import Reducer from './reducer'
 
 
 const initialState = {
-    taskDatas: [],
-    error: null
+    login: false,
 };
 
 const Store = ({children}) => {

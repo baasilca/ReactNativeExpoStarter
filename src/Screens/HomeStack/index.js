@@ -1,9 +1,8 @@
 import React from 'react';
 import { LogBox } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Onboarding from '../Onboarding'
-import CreateTask from '../CreateTask'
-import TaskList from '../TaskList'
+import Signup from '../Signup'
+import Login from '../Login'
 
 const Stack = createNativeStackNavigator();
 
@@ -13,31 +12,16 @@ function App(props) {
 
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
-        name="Home"
-        component={Onboarding}
-        options={{
-          headerShown: false,
-          headerStyle: {
-            backgroundColor: "green",
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      /> */}
-
       <Stack.Screen
-        name="TaskList"
-        component={TaskList}
+        name="Login"
+        component={Login}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="CreateTask"
-        component={CreateTask}
+        name="Signup"
+        component={Signup}
         options={{
           headerShown: false,
         }}

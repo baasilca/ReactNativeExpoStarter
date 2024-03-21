@@ -1,10 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { TextInput, useTheme } from 'react-native-paper';
+import { useState } from "react";
 
 
 const index = (props) => {
     const theme = useTheme()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     return (
 
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.primary }]}>
@@ -21,6 +24,7 @@ const index = (props) => {
                         style={{ backgroundColor: "#fff" }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        onChangeText={setEmail}
                     />
                     <TextInput
                         label="Password"
@@ -28,9 +32,10 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
+                        onChangeText={setPassword}
                     />
 
-                    <TouchableOpacity  style={[styles.loginButton, { backgroundColor: theme.colors.primary }]}>
+                    <TouchableOpacity  style={[styles.loginButton, { backgroundColor: theme.colors.primary }]} onPress={() => console.log('Email: ${email}, Password: ${password}')}>
                                 <Text style={{ color: "#fff", fontSize: 20 }}>Login</Text>
                     </TouchableOpacity>
                 </View>

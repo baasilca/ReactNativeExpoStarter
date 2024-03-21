@@ -1,10 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput, useTheme } from 'react-native-paper';
 
 
 const index = (props) => {
+    const [name, setName] = useState(''); 
+    const [email, setEmail] = useState(''); 
+    const [phone, setPhone] = useState(''); 
+    const [password, setPassword] = useState(''); 
+    const [confirmPassword, setConfirmPassword] = useState('');
+  
+    const signup_func = () => {
+      console.log('Name:', name);
+      console.log('Email:', email);
+      console.log('phone:', phone);
+      console.log('Password:', password);
+      console.log('Confirm Password:', confirmPassword);
+    };
+  
     const theme = useTheme()
 
     return (
@@ -22,18 +36,25 @@ const index = (props) => {
                         style={{ backgroundColor: "#fff" }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        value={name} 
+                        onChangeText={setName} 
                     />
                     <TextInput
                         label="Email"
                         style={{ backgroundColor: "#fff", marginTop: 20 }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        value={email} 
+                        onChangeText={setEmail} 
                     />
                           <TextInput
                         label="Phone"
                         style={{ backgroundColor: "#fff", marginTop: 20 }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        value={phone} 
+                        onChangeText={setPhone} 
+                        
                     />
                     <TextInput
                         label="Password"
@@ -41,6 +62,8 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
+                        value={password} 
+                        onChangeText={setPassword} 
                     />
                     <TextInput
                         label="Confirm Password"
@@ -48,9 +71,11 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
+                        value={confirmPassword} 
+                        onChangeText={setConfirmPassword} 
                     />
 
-                    <TouchableOpacity style={[styles.signupButton, { backgroundColor: theme.colors.primary }]}>
+                    <TouchableOpacity onPress={signup_func} style={[styles.signupButton, { backgroundColor: theme.colors.primary }]}>
                             <Text style={{ color: "#fff", fontSize: 20 }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>

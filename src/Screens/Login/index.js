@@ -1,10 +1,39 @@
-import React from 'react'
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { TextInput, useTheme } from 'react-native-paper';
 
 
 const index = (props) => {
     const theme = useTheme()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    async function postJSON(email,password) {
+        try {
+          const postData={
+           email: email,
+            password: password
+      
+          }
+          const headers = {
+            'device-id': 'd12121',
+            'app-type': 'web'
+          };
+          const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/login", {
+            method: "POST", // or 'PUT'
+            headers: headers,
+            body: JSON.stringify(postData),
+          });
+      
+          const result = await response.json();
+          console.log("Success:", result);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+      
+      //const data = { username: "example" };
+      //postJSON(); 
     return (
 
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.primary }]}>
@@ -21,6 +50,7 @@ const index = (props) => {
                         style={{ backgroundColor: "#fff" }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        onChangeText={setEmail}
                     />
                     <TextInput
                         label="Password"
@@ -28,10 +58,12 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
+                        onChangeText={setPassword}
                     />
 
-                    <TouchableOpacity  style={[styles.loginButton, { backgroundColor: theme.colors.primary }]}>
+                    <TouchableOpacity  style={[styles.loginButton, { backgroundColor: theme.colors.primary }]} onPress={() =>  postJSON(email, password)}>
                                 <Text style={{ color: "#fff", fontSize: 20 }}>Login</Text>
+                                
                     </TouchableOpacity>
                 </View>
                 <View style={{ height: 80, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', }} />

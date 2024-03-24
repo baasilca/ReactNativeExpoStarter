@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput, useTheme } from 'react-native-paper';
@@ -6,6 +6,40 @@ import { TextInput, useTheme } from 'react-native-paper';
 
 const index = (props) => {
     const theme = useTheme()
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNo, setPhoneNo] = useState("")
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    async function postJSON(name,email, phoneNo,password, confirmPassword) {
+        try {
+          const postData={
+            name: name,
+            email: email,
+            phoneNumber: phoneNo,
+            password: password,
+            confirmPassword: confirmPassword
+      
+          }
+          const headers = {
+            'device-id': 'd12121',
+            'app-type': 'web'
+          };
+          const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/signup", {
+            method: "POST", // or 'PUT'
+            headers: headers,
+            body: JSON.stringify(postData),
+          });
+      
+          const result = await response.json();
+          console.log("Success:", result);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+      
+     // const data = { username: "example" };
+      //postJSON(); 
 
     return (
 
@@ -22,18 +56,22 @@ const index = (props) => {
                         style={{ backgroundColor: "#fff" }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        onChangeText={setName}
                     />
                     <TextInput
                         label="Email"
                         style={{ backgroundColor: "#fff", marginTop: 20 }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        onChangeText={setEmail}
                     />
                           <TextInput
                         label="Phone"
                         style={{ backgroundColor: "#fff", marginTop: 20 }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
+                        onChangeText={setPhoneNo}
+                        
                     />
                     <TextInput
                         label="Password"
@@ -41,6 +79,7 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
+                        onChangeText={setPassword}
                     />
                     <TextInput
                         label="Confirm Password"
@@ -48,10 +87,12 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
+                        onChangeText={setConfirmPassword}
                     />
 
-                    <TouchableOpacity style={[styles.signupButton, { backgroundColor: theme.colors.primary }]}>
+                    <TouchableOpacity style={[styles.signupButton, { backgroundColor: theme.colors.primary }]} onPress={() => postJSON(name, email, phoneNo, password, confirmPassword)}>
                             <Text style={{ color: "#fff", fontSize: 20 }}>Sign Up</Text>
+                            
                     </TouchableOpacity>
                 </View>
 

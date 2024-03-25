@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput, useTheme } from 'react-native-paper';
-import axios from 'axios';
+//import axios from 'axios';
 
 const index = (props) => {
     const [name, setName] = useState('');
@@ -10,7 +10,67 @@ const index = (props) => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const theme = useTheme();
+
+    const validateForm = () => {
+        let isValid = true;
+
+        if (!name.trim()) {
+            setNameError('Name is required');
+            isValid = false;
+        } else {
+            setNameError('');
+        }
+
+        if (!email.trim()) {
+            setEmailError('Email is required');
+            isValid = false;
+        } else {
+            setEmailError('');
+        }
+
+        if (!phone.trim()) {
+            setPhoneError('Phone is required');
+            isValid = false;
+        } else {
+            setPhoneError('');
+        }
+
+        if (!password.trim()) {
+            setPasswordError('Password is required');
+            isValid = false;
+        } else {
+            setPasswordError('');
+        }
+
+        if (!confirmPassword.trim()) {
+            setConfirmPasswordError('Confirm Password is required');
+            isValid = false;
+        } else if (password !== confirmPassword) {
+            setConfirmPasswordError('Passwords do not match');
+            isValid = false;
+        } else {
+            setConfirmPasswordError('');
+        }
+
+        return isValid;
+    };
+
+    const handleSignup = () => {
+        if (validateForm()) {
+            // Form is valid, proceed with signup logic
+            console.log('Form is valid. Name:', name, 'Email:', email, 'Phone:', phone, 'Password:', password, 'Confirm Password:', confirmPassword);
+            // Perform signup operation
+        } else {
+            // Form is invalid, display error messages
+            console.log('Form has errors');
+        }
+    };
 
     /*const signup_func = async () => {
         try {

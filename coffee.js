@@ -1,23 +1,27 @@
 import React from 'react';
-import { View, ImageBackground, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { StyleSheet, View, Text, Button , ImageBackground} from 'react-native';
 
-const CoffeeComponent = () => {
+const CoffeeUI = () => {
   return (
     <ImageBackground
-      source={require('./coffee.png')} // Make sure to provide the correct path to your coffee image
       style={styles.backgroundImage}
-      resizeMode="cover"
+      source={require('./coffee.png')}
     >
       <View style={styles.overlay}>
-        <Text style={styles.text}>
-          Coffee so good, your taste buds will love it
-        </Text>
-        <Text style={styles.text}>
-          The best grain, the finest roast, the powerful flavour
-        </Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Get Started</Text>
-        </TouchableOpacity>
+        <View style={styles.textcontainer}>
+          <Text style={styles.text_1}>
+            Coffee so good,{"\n"} your taste buds{"\n"}will love it
+          </Text>
+
+          <Text style={styles.text_2}>
+            The best grain, the finest roast, the powerful flavour
+          </Text>
+
+          <Button 
+            title="Get Started"
+            color="#f4a460"
+          />
+        </View>
       </View>
     </ImageBackground>
   );
@@ -26,27 +30,35 @@ const CoffeeComponent = () => {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    //justifyContent: 'flex-end',
+    backgroundColor: '#FFD7B4',
   },
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust the opacity as needed
-    padding: 20,
-    borderRadius: 10,
+    flex: 1, 
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  text: {
+  textContainer: {
+    marginBottom: 20,
+  },
+  text_1: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 30,
+    fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10,
   },
+  text_2: {
+    color: 'white',
+    fontSize: 14,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
   button: {
-    backgroundColor: 'brown',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginTop: 20,
+    backgroundColor: '#FFD7B4',
+    paddingHorizontal: 100,
+    paddingVertical: 20,
+    borderRadius: 15,
   },
   buttonText: {
     color: 'white',
@@ -55,4 +67,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CoffeeComponent;
+
+export default CoffeeUI;

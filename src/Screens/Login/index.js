@@ -1,21 +1,28 @@
-import React,{useState} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { TextInput, useTheme } from 'react-native-paper';
-
+import axios from 'axios';
 
 const index = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const theme = useTheme()
+    const theme = useTheme();
 
-    const login_func = () => {
-        console.log('Email:', email);
-        console.log('Password:', password);
-
+    const login_func = async () => {
+        try {
+            const response = await axios.post('https://api.dev.returnredirect.com/api/1.0/auth/login', {
+                email: email,
+                password: password
+            });
+            
+            console.log('Login successful:', response.data);
+        } catch (error) {
+            
+            console.error('Login error:', error);
+        }
     };
 
     return (
-
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.primary }]}>
             <View style={{ justifyContent: "center", alignItems: "center", padding: 100 }}>
                 <Text style={{ color: "#fff", fontSize: 40 }}>EXPO</Text>
@@ -51,7 +58,7 @@ const index = (props) => {
                 <View style={{ height: 80, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', }} />
             </View>
             <View style={{ backgroundColor: "#f0f0f0", height: 120, justifyContent: "center", alignItems: "center", flexDirection: 'row' }}>
-                <Text style={{}}>Dont't have any account ? </Text>
+                <Text style={{}}>Don't have any account? </Text>
                 <TouchableOpacity onPress={() => {
                     props.navigation.navigate('Signup')
                 }}>
@@ -60,10 +67,7 @@ const index = (props) => {
             </View>
         </ScrollView>
     );
-
 }
-
-export default index
 
 const styles = StyleSheet.create({
     container: {
@@ -77,4 +81,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         minHeight: 65
     }
-})
+});
+
+export default index;

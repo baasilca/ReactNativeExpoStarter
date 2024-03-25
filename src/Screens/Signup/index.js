@@ -1,28 +1,35 @@
-import React,{useState} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput, useTheme } from 'react-native-paper';
-
+import axios from 'axios';
 
 const index = (props) => {
-    const [name, setName] = useState(''); 
-    const [email, setEmail] = useState(''); 
-    const [phone, setPhone] = useState(''); 
-    const [password, setPassword] = useState(''); 
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-  
-    const signup_func = () => {
-      console.log('Name:', name);
-      console.log('Email:', email);
-      console.log('phone:', phone);
-      console.log('Password:', password);
-      console.log('Confirm Password:', confirmPassword);
+    const theme = useTheme();
+
+    const signup_func = async () => {
+        try {
+            const response = await axios.post('https://api.dev.returnredirect.com/api/1.0/auth/signup', {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password,
+                confirmPassword: confirmPassword
+            });
+            
+            console.log('Signup successful:', response.data);
+        } catch (error) {
+            
+            console.error('Signup error:', error);
+        }
     };
-  
-    const theme = useTheme()
 
     return (
-
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.primary }]}>
             <View style={{ justifyContent: 'space-between', alignItems: "center", padding: 50, flexDirection: "row" }}>
                 <MaterialCommunityIcons name='arrow-left' size={40} color={"#fff"} onPress={() => { props.navigation.goBack() }} />
@@ -36,25 +43,24 @@ const index = (props) => {
                         style={{ backgroundColor: "#fff" }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
-                        value={name} 
-                        onChangeText={setName} 
+                        value={name}
+                        onChangeText={setName}
                     />
                     <TextInput
                         label="Email"
                         style={{ backgroundColor: "#fff", marginTop: 20 }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
-                        value={email} 
-                        onChangeText={setEmail} 
+                        value={email}
+                        onChangeText={setEmail}
                     />
-                          <TextInput
+                    <TextInput
                         label="Phone"
                         style={{ backgroundColor: "#fff", marginTop: 20 }}
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
-                        value={phone} 
-                        onChangeText={setPhone} 
-                        
+                        value={phone}
+                        onChangeText={setPhone}
                     />
                     <TextInput
                         label="Password"
@@ -62,8 +68,8 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
-                        value={password} 
-                        onChangeText={setPassword} 
+                        value={password}
+                        onChangeText={setPassword}
                     />
                     <TextInput
                         label="Confirm Password"
@@ -71,12 +77,12 @@ const index = (props) => {
                         underlineColor='transparent'
                         activeUnderlineColor={theme.colors.primary}
                         secureTextEntry={true}
-                        value={confirmPassword} 
-                        onChangeText={setConfirmPassword} 
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
                     />
 
                     <TouchableOpacity onPress={signup_func} style={[styles.signupButton, { backgroundColor: theme.colors.primary }]}>
-                            <Text style={{ color: "#fff", fontSize: 20 }}>Sign Up</Text>
+                        <Text style={{ color: "#fff", fontSize: 20 }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -91,10 +97,7 @@ const index = (props) => {
             </View>
         </ScrollView>
     );
-
 }
-
-export default index
 
 const styles = StyleSheet.create({
     container: {
@@ -108,4 +111,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         minHeight: 65
     }
-})
+});
+
+export default index;

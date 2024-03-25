@@ -8,7 +8,7 @@ const index = (props) => {
     const [password, setPassword] = useState('');
     const theme = useTheme();
 
-    const login_func = async () => {
+    /*const login_func = async () => {
         try {
             const response = await axios.post('https://api.dev.returnredirect.com/api/1.0/auth/login', {
                 email: email,
@@ -20,7 +20,34 @@ const index = (props) => {
             
             console.error('Login error:', error);
         }
-    };
+    };*/
+
+    async function postJSON(email,password) {
+        try {
+          const postData={
+    
+            email: email,
+            
+            password: password,
+           
+      
+          }
+          const headers = {
+            'device-id': 'd12121',
+            'app-type': 'web'
+          };
+          const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/login", {
+            method: "POST", // or 'PUT'
+            headers: headers,
+            body: JSON.stringify(postData),
+          });
+      
+          const result = await response.json();
+          console.log("Success:", result);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
 
     return (
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.primary }]}>
@@ -51,7 +78,7 @@ const index = (props) => {
                         onChangeText={setPassword}
                     />
 
-                    <TouchableOpacity onPress={login_func}  style={[styles.loginButton, { backgroundColor: theme.colors.primary }]}>
+                    <TouchableOpacity onPress={() =>  postJSON(email, password)}  style={[styles.loginButton, { backgroundColor: theme.colors.primary }]}>
                         <Text style={{ color: "#fff", fontSize: 20 }}>Login</Text>
                     </TouchableOpacity>
                 </View>

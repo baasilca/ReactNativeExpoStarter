@@ -12,7 +12,7 @@ const index = (props) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const theme = useTheme();
 
-    const signup_func = async () => {
+    /*const signup_func = async () => {
         try {
             const response = await axios.post('https://api.dev.returnredirect.com/api/1.0/auth/signup', {
                 name: name,
@@ -27,8 +27,34 @@ const index = (props) => {
             
             console.error('Signup error:', error);
         }
-    };
+    };*/
 
+    async function postJSON(name,email, phone,password, confirmPassword) {
+        try {
+          const postData={
+            name: name,
+            email: email,
+            phoneNumber: phone,
+            password: password,
+            confirmPassword: confirmPassword
+      
+          }
+          const headers = {
+            'device-id': 'd12121',
+            'app-type': 'web'
+          };
+          const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/signup", {
+            method: "POST", // or 'PUT'
+            headers: headers,
+            body: JSON.stringify(postData),
+          });
+      
+          const result = await response.json();
+          console.log("Success:", result);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
     return (
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.primary }]}>
             <View style={{ justifyContent: 'space-between', alignItems: "center", padding: 50, flexDirection: "row" }}>
@@ -81,7 +107,7 @@ const index = (props) => {
                         onChangeText={setConfirmPassword}
                     />
 
-                    <TouchableOpacity onPress={signup_func} style={[styles.signupButton, { backgroundColor: theme.colors.primary }]}>
+                    <TouchableOpacity onPress={() =>  postJSON(name,email, phone,password, confirmPassword)} style={[styles.signupButton, { backgroundColor: theme.colors.primary }]}>
                         <Text style={{ color: "#fff", fontSize: 20 }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>

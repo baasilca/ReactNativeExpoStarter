@@ -52,18 +52,22 @@ const Index = (props) => {
     
         if (email.trim() && password.trim() && name.trim() && phone.trim() && confirmPassword.trim() && password === confirmPassword) {
           try {
-            const response = await fetch('https://api.dev.returnredirect.com/api/1.0/auth/signup', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                name,
-                email,
+            const postData={
+                name: name,
+                email: email,
                 phoneNumber: phone,
-                password,
-                confirmPassword,
-              }),
+                password: password,
+                confirmPassword: confirmPassword
+          
+              }
+              const headers = {
+                'device-id': 'd12121',
+                'app-type': 'web'
+              };
+              const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/signup", {
+                method: "POST", // or 'PUT'
+                headers: headers,
+                body: JSON.stringify(postData),
             });
     
             if (response.ok) {

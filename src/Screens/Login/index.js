@@ -37,20 +37,21 @@ const Index = (props) => {
               }
               const headers = {
                 'device-id': 'd12121',
-                'app-type': 'web'
+                'app-type': 'web',
+                'Content-Type':'application/json' 
               };
               const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/login", {
                 method: "POST", // or 'PUT'
                 headers: headers,
                 body: JSON.stringify(postData),
             });
-           
+            console.log("----------",response);
     
             if (response.ok) {
               // Sign up successful
-              console.log('Sign up successful');
+              console.log('Login successful');
               // Navigate to the login page
-              props.navigation.navigate('Login');
+              props.navigation.navigate('CoffeeHome');
             } else {
               // Sign up failed
               const errorData = await response.json();
@@ -104,7 +105,7 @@ const Index = (props) => {
                 </View>
                 <View style={{ height: 80, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', }} />
             </View>
-            <View style={{ backgroundColor: "#f0f0f0", height: 120, justifyContent: "center", alignItems: "center", flexDirection: 'row' }}>
+            <View style={{ backgroundColor: "#f0f0f0", height: 170, justifyContent: "center", alignItems: "center", flexDirection: 'row' }}>
                 <Text style={{}}>Don't have any account? </Text>
                 <TouchableOpacity onPress={() => {
                     props.navigation.navigate('Signup')

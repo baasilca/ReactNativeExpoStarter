@@ -12,7 +12,7 @@ export default Main = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: '#000',
+      primary: '#a0522d',
       secondary:"#fff"
     },
   };

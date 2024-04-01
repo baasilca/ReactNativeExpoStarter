@@ -62,13 +62,16 @@ const Index = (props) => {
               }
               const headers = {
                 'device-id': 'd12121',
-                'app-type': 'web'
+                'app-type': 'web',
+                'Content-Type':'application/json'
               };
               const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/signup", {
                 method: "POST", // or 'PUT'
                 headers: headers,
                 body: JSON.stringify(postData),
             });
+
+            console.log("----------",response);
     
             if (response.ok) {
               // Sign up successful
@@ -156,7 +159,7 @@ const Index = (props) => {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{ height: 120, alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ height: 190, alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}>
                     <Text style={{}}>You have account ? </Text>
                     <TouchableOpacity onPress={() => {
                         props.navigation.navigate('Login')

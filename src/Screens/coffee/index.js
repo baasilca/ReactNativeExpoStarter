@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button ,TouchableOpacity, ImageBackground} from 'react-native';
-
-const PeachPage = () => {
+import { StyleSheet, View, Text ,TouchableOpacity, ImageBackground} from 'react-native';
+import coffeeImage from './coffee.png';
+const Index = (props) => {
   return (
     <ImageBackground
     style={styles.container}
-    source={require('../coffee.png')}
+    source={coffeeImage}
   >
       <View style={styles.content}>
       <View style={styles.space} />
@@ -17,7 +17,9 @@ const PeachPage = () => {
           The best grain, the finest roast, the powerful flavour. 
         </Text>
 
-         <TouchableOpacity style={{ backgroundColor: '#f4a460', padding: 10, borderRadius: 10 }}>
+         <TouchableOpacity style={{ backgroundColor: '#f4a460', padding: 10, borderRadius: 10 }}  onPress={() => {
+                        props.navigation.navigate('Login')
+                    }}>
   <Text style={{ color: '#fff', fontSize:20}}> Get started </Text>
 </TouchableOpacity>
       </View>
@@ -61,4 +63,4 @@ const styles = StyleSheet.create({
     color:'#dcdcdc',
   }
 });
-export default PeachPage;
+export default Index;

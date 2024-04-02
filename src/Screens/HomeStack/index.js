@@ -14,7 +14,7 @@ function App(props) {
 
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="PeachPage"
         component={PeachPage}
         options={{
@@ -27,7 +27,7 @@ function App(props) {
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
       <Stack.Screen
         name="CoffeeHome"
         component={CoffeeHome}

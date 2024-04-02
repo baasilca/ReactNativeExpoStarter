@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { TextInput, useTheme } from 'react-native-paper';
 
-const Login = ({ navigation }) => { // Include navigation prop
+const Login = ({ navigation }) => { 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
@@ -105,7 +105,7 @@ const Login = ({ navigation }) => { // Include navigation prop
             <View style={{ backgroundColor: "#f0f0f0", height: 120, justifyContent: "center", alignItems: "center", flexDirection: 'row' }}>
                 <Text style={{}}>Don't have any account? </Text>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Signup'); // Navigate to Signup screen if needed
+                    navigation.navigate('Signup'); 
                 }}>
                     <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
                 </TouchableOpacity>

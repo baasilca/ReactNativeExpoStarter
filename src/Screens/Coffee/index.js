@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
 
-const index = () => {
+const coffee = () => {
   const navigation = useNavigation(); 
 
   const handleGetStarted = () => {
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default index;
+export default coffee;

@@ -1,69 +1,72 @@
-
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { TextInput, useTheme } from 'react-native-paper';
 
-const Login = ({ navigation }) => { // Include navigation prop
+const Index = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({});
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const theme = useTheme();
 
-    const postJSON = async (email, password) => {
-        try {
-            const postData = {
+    const { email: storedEmail, password: storedPassword } = props.route.params || { email: '', password: '' };
+
+
+    const handleSubmit = async () => {
+        if (!email.trim()) {
+          setEmailError('Email is required');
+        } else {
+          setEmailError('');
+        }
+    
+        if (!password.trim()) {
+          setPasswordError('Password is required');
+        } else {
+          setPasswordError('');
+        }
+    
+           
+        if (email.trim() && password.trim() ) {
+          try {
+            const postData={
+                
                 email: email,
                 password: password,
-            };
-            const headers = {
+                
+          
+              }
+              const headers = {
                 'device-id': 'd12121',
                 'app-type': 'web',
-                'Content-Type':'application/json',
-            };
-            const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/login", {
-                method: "POST",
+                'Content-Type':'application/json' 
+              };
+              const response = await fetch("https://api.dev.returnredirect.com/api/1.0/auth/login", {
+                method: "POST", // or 'PUT'
                 headers: headers,
                 body: JSON.stringify(postData),
             });
-            const result = await response.json();
-            console.log("Success:", result);
-            
-            navigation.navigate('CoffeeAppScreen');
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
-
-    const handleSubmit = () => {
-        const formErrors = validateForm();
-        if (Object.keys(formErrors).length === 0) {
-            console.log('Form submitted successfully!');
-            
-            postJSON(email, password);
-        } else {
-            console.log('Form has errors. Please correct them.');
-        }
-    };
+            console.log("----------",response);
     
-    const validateForm = () => {
-        let errors = {};
-
-        
-        if (!email) {
-            errors.email = 'Email is required.';
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            errors.email = 'Email is invalid.';
+            if (response.ok) {
+              // Sign up successful
+              console.log('Login successful');
+              // Navigate to the login page
+              props.navigation.navigate('CoffeeHome');
+            } else {
+              // Sign up failed
+              const errorData = await response.json();
+              console.log('Sign up error:', errorData.error);
+              //Alert.alert('Error', errorData.error);
+            }
+          } catch (error) {
+            console.log('Network error:', error);
+            //Alert.alert('Error', 'Network error');
+          }
         }
+      };
 
-        
-        if (!password) {
-            errors.password = 'Password is required.';
-        }
 
-        setErrors(errors);
-        return errors;
-    };
-
+   
 
     return (
         <ScrollView style={[styles.container, { backgroundColor: theme.colors.primary }]}>
@@ -82,9 +85,9 @@ const Login = ({ navigation }) => { // Include navigation prop
                         activeUnderlineColor={theme.colors.primary}
                         value={email}
                         onChangeText={setEmail}
+                        error={emailError ? true : false}
                     />
-                    {errors.email && <Text style={styles.error}>{errors.email}</Text>}
-
+                    {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
                     <TextInput
                         label="Password"
                         style={{ backgroundColor: "#fff", marginTop: 20 }}
@@ -93,19 +96,19 @@ const Login = ({ navigation }) => { // Include navigation prop
                         secureTextEntry={true}
                         value={password}
                         onChangeText={setPassword}
+                        error={passwordError ? true : false}
                     />
-                    {errors.password && <Text style={styles.error}>{errors.password}</Text>}
-
+                    {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
                     <TouchableOpacity onPress={handleSubmit} style={[styles.loginButton, { backgroundColor: theme.colors.primary }]}>
                         <Text style={{ color: "#fff", fontSize: 20 }}>Login</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ height: 80, alignItems: 'center', flexDirection: 'row', justifyContent: 'center', }} />
             </View>
-            <View style={{ backgroundColor: "#f0f0f0", height: 120, justifyContent: "center", alignItems: "center", flexDirection: 'row' }}>
+            <View style={{ backgroundColor: "#f0f0f0", height: 170, justifyContent: "center", alignItems: "center", flexDirection: 'row' }}>
                 <Text style={{}}>Don't have any account? </Text>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate('Signup'); // Navigate to Signup screen if needed
+                    props.navigation.navigate('Signup')
                 }}>
                     <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
                 </TouchableOpacity>
@@ -128,9 +131,9 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red',
-        fontSize: 16,
-        marginBottom: 10,
-    },
+        fontSize: 14,
+        marginTop: 5,
+    }
 });
 
-export default Login;
+export default Index;

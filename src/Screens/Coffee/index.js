@@ -1,7 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button , ImageBackground} from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
 
-const CoffeeUI = () => {
+const index = () => {
+  const navigation = useNavigation(); 
+
+  const handleGetStarted = () => {
+    navigation.navigate('Login'); 
+  };
+
   return (
     <ImageBackground
       style={styles.backgroundImage}
@@ -17,10 +24,9 @@ const CoffeeUI = () => {
             The best grain, the finest roast, the powerful flavour
           </Text>
 
-          <Button 
-            title="Get Started"
-            color="#f4a460"
-          />
+          <TouchableOpacity onPress={handleGetStarted} style={styles.button}>
+            <Text style={styles.buttonText}>Get Started</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
@@ -30,7 +36,6 @@ const CoffeeUI = () => {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    //justifyContent: 'flex-end',
     backgroundColor: '#FFD7B4',
   },
   overlay: {
@@ -38,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  textContainer: {
+  textcontainer: {
     marginBottom: 20,
   },
   text_1: {
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#FFD7B4',
+    backgroundColor: '#f4a460',
     paddingHorizontal: 100,
     paddingVertical: 20,
     borderRadius: 15,
@@ -64,8 +69,8 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
-
-export default CoffeeUI;
+export default index;

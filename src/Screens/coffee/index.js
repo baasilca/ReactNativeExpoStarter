@@ -1,7 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { StyleSheet, View, Text ,TouchableOpacity, ImageBackground} from 'react-native';
 import coffeeImage from './coffee.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Index = (props) => {
+
+useEffect(()=>{
+
+  AsyncStorage.getItem("getStartedButtonPressed").then((value) => {
+    console.log("--------",value);
+    if(value == "true"){
+      props.navigation.navigate('Login')
+    }
+})
+.then(res => {
+    //do something else
+});
+
+},[])
+
   return (
     <ImageBackground
     style={styles.container}
@@ -18,7 +34,8 @@ const Index = (props) => {
         </Text>
 
          <TouchableOpacity style={{ backgroundColor: '#f4a460', padding: 10, borderRadius: 10 }}  onPress={() => {
-                        props.navigation.navigate('Login')
+                      AsyncStorage.setItem("getStartedButtonPressed","true")
+                      props.navigation.navigate('Login')
                     }}>
   <Text style={{ color: '#fff', fontSize:20}}> Get started </Text>
 </TouchableOpacity>

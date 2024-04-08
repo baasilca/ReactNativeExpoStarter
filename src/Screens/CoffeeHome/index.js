@@ -63,9 +63,9 @@ export default function Index(props) {
 
     <View style={styles.container}>
 
-      <View style={{ flexDirection: 'column', justifyContent: 'flex-start', alignSelf: 'flex-start' }}>
-        <Text style={{ color: 'white' }}>Location:</Text>
-        <Text style={{ color: 'white', fontWeight: "bold", fontSize: 20 }}>Indiranagar, Banglore</Text>
+      <View style={{ flexDirection: 'column', justifyContent: 'flex-start', alignSelf: 'flex-start',marginTop: 50 }}>
+        <Text style={{ color: 'gray',fontsize: 16 }}>Location</Text>
+        <Text style={{ color: 'white', fontWeight: "bold", fontSize: 20 }}>Indiranagar, Bangalore</Text>
         <View style={styles.space} />
       </View>
 
@@ -125,6 +125,23 @@ const styles = StyleSheet.create({
     padding: 20,
 
 
+  },
+  backgroundContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  blackSection: {
+    backgroundColor: 'black',
+    flex: 1,
+    height: '50%',
+  },
+  whiteSection: {
+    backgroundColor: 'white',
+    flex: 1,
+    height: '50%',
   },
   box: {
     flexDirection: 'column',
